@@ -31,11 +31,6 @@ def reader_menu(data, headers):
     field = input("Opção dessejada:")
     if field == int(1):
         search_value = input("Digite o valor desejado:")
-        
-    elif field == int(1):
-    elif field == int(1):
-    elif field == int(1):
-    elif field == int(1):
-    elif field == int(1):
-    else:
+        #TODO
+    
 reader_start()
