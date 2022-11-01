@@ -27,11 +27,28 @@ def reader_menu(data, headers):
     for header in headers:
         print("Digite {number} para selecionar o campo '{header}' para a pesquisa.".format(number = n, header = header))
         n += 1
-    #print(data)
-    field = input("Opção dessejada:")
-    if field == int(1):
-        search_value = input("Digite o valor desejado:")
-        #TODO filter
-    #TODO else options
+    ##
+    ##filtered = data.query("profession == 'developer'")
+    ##print(filtered)
+    ##
+    #print(data) 
+    ##
+    field = input("Opção desejada:")
+    #print(headers[int(field)-1])
+    print("A opção escolhida para a busca foi {header}".format(header = headers[int(field)-1]))
     
+
+    reader_filter(data, field, headers)
+def reader_filter(data, field, headers):
+    valueToFind = input("Digite o que deseja procurar:")
+    head = headers[int(field)-1]
+    try:
+        filtered = data.query("{heads} == @valueToFind".format(heads = head))
+        #print(filtered)
+    except Exception as e:
+        print('Tem algum erro na sua busca, provavelmente não existe o que procura no arquivo em questão. :{0}'.format(e))
+    else:
+        filtered = data.query("{heads} == @valueToFind".format(heads = head))
+        print("Abaixo está o resultado de sua busca")
+        print(filtered)
 reader_start()
