@@ -31,6 +31,7 @@ def reader_menu(data, headers):
     field = input("Opção dessejada:")
     if field == int(1):
         search_value = input("Digite o valor desejado:")
-        #TODO
+        #TODO filter
+    #TODO else options
     
 reader_start()
