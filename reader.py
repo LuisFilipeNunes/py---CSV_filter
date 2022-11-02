@@ -49,6 +49,41 @@ def reader_filter(data, field, headers):
         print('Tem algum erro na sua busca, provavelmente não existe o que procura no arquivo em questão. :{0}'.format(e))
     else:
         filtered = data.query("{heads} == @valueToFind".format(heads = head))
-        print("Abaixo está o resultado de sua busca")
-        print(filtered)
+    if filtered.empty:
+        print("Sua pesquisa não obteve resultados...")
+        reDo = input("Você deseja procurar no arquivo novamente? (S/N)")
+        if reDo == "S":
+            reader_start()
+        elif reDo == "N":
+            print("Okay, programa encerrado!")
+            quit()
+    print("Abaixo está o resultado de sua busca")
+    print(filtered)
+    choice = input("Você gostaria de exportar estes dados em um novo arquivo CSV? (S/N)")
+    if choice == "S":
+        reader_toCSV(filtered)
+    elif choice == "N":
+        print("Está certo!")
+        reDo = input("Você deseja procurar no arquivo novamente? (S/N)")
+        if reDo == "S":
+            reader_start()
+        elif reDo == "N":
+            print("Okay, programa encerrado!")
+def reader_toCSV(filtered):
+    fileName = input("Por favor, digite o nome do arquivo que deseja criar: ")
+    try:
+        filtered.to_csv("./{name}.csv".format(name = fileName))
+    except: 
+        print("Houve algum erro!")
+    else:
+        filtered.to_csv("./{name}.csv".format(name = fileName))
+    print("Arquivo Criado!")
+    reDo = input("Você deseja procurar no arquivo novamente? (S/N)")
+    if reDo == "S":
+        reader_start()
+    elif reDo == "N":
+        print("Okay, programa encerrado!")
+    
+    
+
 reader_start()
